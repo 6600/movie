@@ -72,23 +72,23 @@ export default {
   },
   mounted() {
     let _this = this;
-    // document.onkeydown = function (event) {
-    //   if (_this.$route.name == 'register') {
-    //     if (event.keyCode == 37) {
-    //       _this.moveLeft();
-    //     } else if (event.keyCode == 38) {
-    //       _this.moveUp();
-    //     } else if (event.keyCode == 39) {
-    //       _this.moveRight();
-    //     } else if (event.keyCode == 8) {
-    //       _this.$router.go(-1);
-    //     } else if (event.keyCode == 40) {
-    //       _this.moveDown();
-    //     } else if (event.keyCode == 13) {
-    //       _this.activeClick();
-    //     }
-    //   }
-    // };
+    document.onkeydown = function (event) {
+      if (_this.$route.name == 'register') {
+        if (event.keyCode == 37) {
+          _this.moveLeft();
+        } else if (event.keyCode == 38) {
+          _this.moveUp();
+        } else if (event.keyCode == 39) {
+          _this.moveRight();
+        } else if (event.keyCode == 8) {
+          _this.$router.go(-1);
+        } else if (event.keyCode == 40) {
+          _this.moveDown();
+        } else if (event.keyCode == 13) {
+          _this.activeClick();
+        }
+      }
+    };
   },
   methods: {
     sendCode(val){

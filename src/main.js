@@ -41,10 +41,3 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
-
-window.fireKeyEvent = function(element, evtType, keyChar) {
-    element.focus();
-    var KeyboardEventInit = {key:keyChar, code:"", location:0, repeat:false, isComposing:false};
-    var evtObj = new KeyboardEvent(evtType, KeyboardEventInit);
-    element.dispatchEvent(evtObj);
-}

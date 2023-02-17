@@ -971,6 +971,7 @@ export default {
           this.activeActive(112)
           return
         }
+        
         if (this.history.length != 0 && this.kd < 10 + this.history.length) {
           this.c.classList.remove("accs");
           this.kd--
@@ -1188,6 +1189,10 @@ export default {
       // this.$refs.ado.play(); //播放
       if (this.index == 3) {
         // history.length+topList.frList.length+topList.rotationList.length
+        if (this.kd == 4) {
+          this.activeActive(111)
+          return
+        }
         if (this.kd <= 10) {
           this.c.classList.remove("accs");
           this.kd = 11
@@ -1313,10 +1318,7 @@ export default {
       }
       if (this.index >= 5 && this.index < 10) {
         if (this.kd <= 10) {
-          this.c.classList.remove("accs");
-          this.kd = 11
-          this.c = document.getElementById(this.kd);
-          this.c.classList.add("accs");
+          this.activeActive(11)
           return
         }
         if (this.kd > 10 && this.kd <= 10 + this.dataList.frList.length) {
@@ -1334,7 +1336,7 @@ export default {
           this.c.classList.add("accs");
           return
         }
-        if (this.kd > 10 + this.dataList.frList.length && this.kd < 10 + this.dataList.frList.length + this.dataList.seList.length) {
+        if (this.kd > 10 + this.dataList.frList.length && this.kd <= 10 + this.dataList.frList.length + this.dataList.seList.length) {
           this.c.classList.remove("accs");
           this.kd = 11 + this.dataList.frList.length + this.dataList.seList.length
           this.c = document.getElementById(this.kd);

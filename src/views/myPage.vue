@@ -494,7 +494,7 @@ export default {
         clear() {
             this.keyword = "";
             this.page = 1;
-            this.getinfosch();
+            this.getHot();
         },
         puback() {
             if (this.keyword.length > 0) {
@@ -1329,7 +1329,7 @@ export default {
                 // case 0: this.gosearch(); break;
                 case 0: this.$router.push({ path: '/classify' }); break;
                 // case 0: this.page = 1; this.getHot(); break;
-                case 1: this.page = 1; this.getHot(); this.changeKD(27); break;
+                case 1: this.page = 1; this.getHot(); break;
                 // case 1: this.page = 1; this.getinshaixuanfo(); break;
                 // case 1: this.$router.push({ path: '/classifyPage' }); break;
                 // case 1: this.$router.push({ path: '/classify' }); break;
@@ -1358,7 +1358,7 @@ export default {
         godetail(item) {
             Cookies.set('kd', this.kd)
             Cookies.set('index', this.index)
-            this.$router.push({ path: "/details", query: { id: item } });
+            this.$router.push({ path: "/details", query: { id: item,isAddHot:1 } });
         },
         gozj() {
             Cookies.set('kd', this.kd)

@@ -90,25 +90,25 @@ export default {
         this.clientHeight = document.documentElement.clientHeight;
         window.addEventListener("scroll", this.scrollBottom, true);
         let _this = this;
-        // document.onkeydown = function (event) {
-        //     if (_this.$route.name == 'user') {
-        //         if (event.keyCode == 37) {
-        //             _this.moveLeft();
-        //         } else if (event.keyCode == 38) {
-        //             _this.moveUp();
-        //         } else if (event.keyCode == 39) {
-        //             _this.moveRight();
-        //         } else if (event.keyCode == 8) {
-        //             _this.$router.go(-1)
-        //         } else if (event.keyCode == 40) {
-        //             _this.moveDown();
-        //         } else if (event.keyCode == 13) {
-        //             _this.activeClick();
-        //         } else if (event.keyCode == 8) {
-        //             this.$router.go(-1)
-        //         }
-        //     }
-        // };
+        document.onkeydown = function (event) {
+            if (_this.$route.name == 'user') {
+                if (event.keyCode == 37) {
+                    _this.moveLeft();
+                } else if (event.keyCode == 38) {
+                    _this.moveUp();
+                } else if (event.keyCode == 39) {
+                    _this.moveRight();
+                } else if (event.keyCode == 8) {
+                    _this.$router.go(-1)
+                } else if (event.keyCode == 40) {
+                    _this.moveDown();
+                } else if (event.keyCode == 13) {
+                    _this.activeClick();
+                } else if (event.keyCode == 8) {
+                    this.$router.go(-1)
+                }
+            }
+        };
     },
     methods: {
         gethis() {

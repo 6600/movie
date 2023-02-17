@@ -399,33 +399,33 @@ export default {
         if (d == undefined) {
             Cookies.set('randomId', this.GetsingleId())
         }
-        // document.onkeyup = function (event) {
-        //     if (_this.$route.name == 'classifyPage') {
-        //         if (event.keyCode == 37) {
-        //             _this.moveLeft();
-        //             _this.up()
-        //         } else if (event.keyCode == 38) {
-        //             _this.moveUp();
-        //             _this.up()
-        //         } else if (event.keyCode == 39) {
-        //             _this.moveRight();
-        //             _this.down()
-        //         } else if (event.keyCode == 8) {
-        //             _this.$router.go(-1);
-        //         } else if (event.keyCode == 40) {
-        //             _this.moveDown();
-        //             _this.down()
-        //         } else if (event.keyCode == 13) {
-        //             _this.activeClick();
-        //         }
-        //     }
-        // };
-        // setTimeout(() => {
-        //     this.kd = 2
-        //     _this.c = document.getElementById(_this.kd);
-        //     console.log(_this.c)
-        //     this.c.classList.add("accs");
-        // }, 200);
+        document.onkeyup = function (event) {
+            if (_this.$route.name == 'classifyPage') {
+                if (event.keyCode == 37) {
+                    _this.moveLeft();
+                    _this.up()
+                } else if (event.keyCode == 38) {
+                    _this.moveUp();
+                    _this.up()
+                } else if (event.keyCode == 39) {
+                    _this.moveRight();
+                    _this.down()
+                } else if (event.keyCode == 8) {
+                    _this.$router.go(-1);
+                } else if (event.keyCode == 40) {
+                    _this.moveDown();
+                    _this.down()
+                } else if (event.keyCode == 13) {
+                    _this.activeClick();
+                }
+            }
+        };
+        setTimeout(() => {
+            this.kd = 2
+            _this.c = document.getElementById(_this.kd);
+            console.log(_this.c)
+            this.c.classList.add("accs");
+        }, 200);
     },
     methods: {
         getHot() {

@@ -151,25 +151,30 @@ export default {
     this.clientHeight = document.documentElement.clientHeight;
     window.addEventListener("scroll", this.scrollBottom, true);
     let _this = this;
-    // document.onkeydown = function (event) {
-    //   if (_this.$route.name == 'classify') {
-    //     if (event.keyCode == 37) {
-    //       _this.moveLeft();
-    //     } else if (event.keyCode == 38) {
-    //       _this.moveUp();
-    //     } else if (event.keyCode == 39) {
-    //       _this.moveRight();
-    //     } else if (event.keyCode == 8) {
-    //       _this.$router.go(-1)
-    //     } else if (event.keyCode == 40) {
-    //       _this.moveDown();
-    //     } else if (event.keyCode == 13) {
-    //       _this.activeClick();
-    //     } else if (event.keyCode == 8) {
-    //       this.$router.go(-1)
-    //     }
-    //   }
-    // };
+    document.onkeydown = function (event) {
+      if (_this.$route.name == 'classify') {
+        if (event.keyCode == 37) {
+          _this.moveLeft();
+        } else if (event.keyCode == 38) {
+          _this.moveUp();
+        } else if (event.keyCode == 39) {
+          _this.moveRight();
+        } else if (event.keyCode == 8) {
+          _this.$router.go(-1)
+        } else if (event.keyCode == 40) {
+          _this.moveDown();
+        } else if (event.keyCode == 13) {
+          _this.activeClick();
+        } else if (event.keyCode == 8) {
+          this.$router.go(-1)
+        }
+      }
+    };
+   setTimeout(() => {
+     this.c = document.getElementById(1);
+     this.c.classList.add("accs");
+     this.kd = 1;
+   }, 100);
   },
   methods: {
     activeClick() {
@@ -377,7 +382,7 @@ export default {
         this.changeleft2()
         this.changeleft3()
       } else if (this.kd >= 1 + this.typeList.category.length + this.typeList.type.length + this.typeList.region.length + this.typeList.year.length && this.kd <=
-       3 +
+        3 +
         this.typeList.category.length + this.typeList.type.length + this.typeList.region.length + this.typeList.year.length) {
         this.c.classList.remove("accs");
         this.kd = 1 + this.typeList.category.length + this.typeList.type.length + this.typeList.region.length;

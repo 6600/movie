@@ -119,4 +119,8 @@ span.accs {
   color: white !important;
   outline-color: #ff9a57 !important;
 }
+.contain {
+  height: 100%;
+  overflow: auto;
+}
 </style>

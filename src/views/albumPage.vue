@@ -216,7 +216,7 @@
                                     </p>
                                 </div>
                             </div>
-                            <p>高分推荐</p>
+                            <p class="htptt">最新推荐</p>
                             <div class="nmovieList">
                                 <div class="nmovie" v-for="(item, index) in dataList.highScoreList"
                                     @click="goDetail(item)"
@@ -899,7 +899,7 @@ export default {
                     this.c.classList.add("accs");
                     return
                 }
-                if (this.kd > 10 + this.dataList.frList.length && this.kd < 10 + this.dataList.frList.length + this.dataList.seList.length) {
+                if (this.kd > 10 + this.dataList.frList.length && this.kd <= 10 + this.dataList.frList.length + this.dataList.seList.length) {
                     this.c.classList.remove("accs");
                     if (this.kd == 14 || this.kd == 15) {
                         this.kd = 11
@@ -1084,6 +1084,7 @@ export default {
                 }
             }
             if (this.index >= 5 && this.index < 10) {
+                console.log('sd')
                 if (this.kd <= 10) {
                     this.c.classList.remove("accs");
                     this.kd = 11
@@ -1106,7 +1107,7 @@ export default {
                     this.c.classList.add("accs");
                     return
                 }
-                if (this.kd > 10 + this.dataList.frList.length && this.kd < 10 + this.dataList.frList.length + this.dataList.seList.length) {
+                if (this.kd > 10 + this.dataList.frList.length && this.kd <= 10 + this.dataList.frList.length + this.dataList.seList.length) {
                     this.c.classList.remove("accs");
                     this.kd = 11 + this.dataList.frList.length + this.dataList.seList.length
                     this.c = document.getElementById(this.kd);
@@ -1114,7 +1115,7 @@ export default {
                     return
                 }
                 if (this.kd > 10 + this.dataList.frList.length + this.dataList.seList.length &&
-                    this.kd <
+                    this.kd <=
                     10 + this.dataList.frList.length + this.dataList.seList.length + this.dataList.videoTypeList.length) {
                     this.c.classList.remove("accs");
                     this.kd = 11 + this.dataList.frList.length + this.dataList.seList.length + this.dataList.videoTypeList.length
