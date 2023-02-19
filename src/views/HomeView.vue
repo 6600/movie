@@ -1923,7 +1923,7 @@ export default {
 
   .swiperr {
     background: #f3f3f3;
-
+    position:relative;
     .swiperrt {
       padding: 5% 0 0 7%;
       // padding: 3% 0 0 5%;

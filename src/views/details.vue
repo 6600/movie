@@ -100,13 +100,13 @@ export default {
       resourcesId: '',
       viewingTime: '',
       id: '',
-      isAddHot:''
+      isAddHot: ''
     };
   },
   mounted() {
     this.getUserInfo();
     this.id = this.$route.query.id
-    if(this.$route.query.isAddHot){
+    if (this.$route.query.isAddHot) {
       this.isAddHot = this.$route.query.isAddHot
     }
     let mi = localStorage.getItem('movieId')
@@ -143,6 +143,40 @@ export default {
     };
   },
   methods: {
+    up() {
+      var el = document.getElementById(this.kd);
+      const viewPortHeight =
+        window.innerHeight ||
+        document.documentElement.clientHeight ||
+        document.body.clientHeight;
+      const offsetTop = el.offsetTop;
+      const scrollTop = document.documentElement.scrollTop;
+      const top = offsetTop - scrollTop;
+      const intop = el.offsetHeight;
+      let d = top >= 0;
+      if (d == false) {
+        document.documentElement.scrollTop = document.getElementById(
+          this.kd
+        ).offsetTop - intop;
+      }
+    },
+    down() {
+      var el = document.getElementById(this.kd);
+      const viewPortHeight =
+        window.innerHeight ||
+        document.documentElement.clientHeight ||
+        document.body.clientHeight;
+      const offsetTop = el.offsetTop;
+      const scrollTop = document.documentElement.scrollTop;
+      const top = offsetTop - scrollTop;
+      const intop = el.offsetHeight;
+      let d = top + intop <= viewPortHeight;
+      if (d == false) {
+        document.documentElement.scrollTop = document.getElementById(
+          this.kd
+        ).offsetTop;
+      }
+    },
     activeClick() {
       document.getElementById(this.kd).click();
       return;
@@ -161,6 +195,7 @@ export default {
         this.c = document.getElementById(this.kd);
         this.c.classList.add("accs");
       }
+      this.up()
     },
     moveRight() {
       // this.$refs.ado.currentTime = 0
@@ -180,6 +215,7 @@ export default {
         this.c = document.getElementById(this.kd);
         this.c.classList.add("accs");
       }
+      this.down()
     },
     moveUp() {
       // this.$refs.ado.currentTime = 0
@@ -195,11 +231,12 @@ export default {
         this.c = document.getElementById(1);
         this.c.classList.add("accs");
         this.kd = 1;
-      } else if (this.kd >= 2 && this.kd <= 7) {
+      } else if (this.kd >= 2 && this.kd <= 2+this.list.resources.length) {
         this.c.classList.remove("accs");
         this.kd = 2;
         this.c = document.getElementById(this.kd);
         this.c.classList.add("accs");
+        document.documentElement.scrollTop = 0;
       } else if (this.kd > 9 && this.kd <= 2 + this.list.resources.length) {
         this.c.classList.remove("accs");
         this.kd = this.kd - 7;
@@ -211,6 +248,8 @@ export default {
         this.c = document.getElementById(this.kd);
         this.c.classList.add("accs");
       }
+
+      this.up()
     },
     moveDown() {
       // this.$refs.ado.currentTime = 0
@@ -252,6 +291,7 @@ export default {
       } else if (this.kd == this.list.resources.length + this.list.recommends.length + 2) {
         return
       }
+      this.down()
     },
     getUserInfo() {
       let c = Cookies.get("token");
@@ -358,10 +398,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.zw{
-    height:36px;
-    width: 100%;
-  }
+.zw {
+  height: 36px;
+  width: 100%;
+}
+
 .midbox {
   display: flex;
   justify-content: space-between;
@@ -534,7 +575,7 @@ export default {
   overflow-y: hidden;
   overflow-x: auto;
   // white-space: nowrap;
-  padding: 20px 0;
+  padding: 20px 10px;
   border-radius: 10px;
 
   .btn {
@@ -555,6 +596,7 @@ export default {
       font-size: 16px;
     }
   }
+
   // .btn:not(:first-of-type) {
   //   margin-left: 16px;
   // }
@@ -611,7 +653,7 @@ export default {
     overflow-x: scroll;
     // overflow-y: hidden;
     white-space: nowrap;
-    padding: 20px 0;
+    padding: 35px 10px;
   }
 
   .tjbox:not(:first-of-type) {
@@ -753,33 +795,41 @@ export default {
     font-size: 25px;
     padding-bottom: 5px;
   }
+
   .tuijie {
     padding: 0px 0;
-}
+  }
+
   .midbox .midr .type {
     color: #2A2A32;
     padding-left: 2%;
     padding-top: 11px;
   }
+
   .midbox .midr .type span {
     padding: 7px 5px;
     border-radius: 10px;
     font-size: 12px;
-}
-.tuijie .tjbox p{
-  font-size: 20px;
-}
-.midbox .midr .introduce {
+  }
+
+  .tuijie .tjbox p {
+    font-size: 20px;
+  }
+
+  .midbox .midr .introduce {
     font-size: 14px;
-}
-.midbox .midr .introducebox{
+  }
+
+  .midbox .midr .introducebox {
     margin: 0 5% 2% 2%;
     border-radius: 10px;
     padding: 14px 0px 26px 10px;
-}
-.zw{
-    height:0px
   }
+
+  .zw {
+    height: 0px
+  }
+
   .slect {
     display: flex;
     height: 30px !important;
