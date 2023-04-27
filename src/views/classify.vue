@@ -127,6 +127,17 @@ export default {
       }
     }
   },
+  activeActive(num) {
+    this.kd = num
+    if (document.querySelector('.accs')) {
+      document.querySelector('.accs').classList.remove("accs")
+    }
+    setTimeout(() => {
+      this.c = document.getElementById(num);
+      this.c.classList.add("accs");
+    }, 0);
+    return;
+  },
   activated() {
     this.kd = 1
     this.page = 1
@@ -736,6 +747,6 @@ export default {
 
 .activeNav {
   color: #FE9D3E;
-  background: #FBF0E5 !important;
+  background: #FBF0E5;
 }
 </style>

@@ -82,7 +82,7 @@ html, body {
   overflow: hidden;
 }
 .accs p {
-  background-color: rgba(255, 255, 255, 0.9) !important;
+  background-color: rgba(255, 255, 255, 0.7) !important;
   color: black !important;
   border-radius: 10px !important;
   font-weight: bold;
@@ -94,7 +94,7 @@ html, body {
   font-weight: normal !important;
 }
 
-.accs p.introduce:after {
+.accs p:after {
   content: '';
   width: 45px;
   background-image: url(https://cunchu.site/work/script/%E8%A7%86%E9%A2%91%E6%93%8D%E4%BD%9C%E6%8E%A7%E5%88%B6/play.png);
@@ -112,6 +112,12 @@ html, body {
 
 .accs {
   transform: scale(1.13) !important;
+}
+
+button.accs {
+  background-color: rgba(239, 70, 4, 0.7098039216) !important;
+  color: white !important;
+  outline: none !important;
 }
 
 span.accs {

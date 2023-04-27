@@ -6,8 +6,8 @@
             <el-col :xs="24" :sm="22" :md="22" :lg="22" :xl="22" :offset="1">
                 <div class="typeNavBar">
                     <div class="tnl" id="tnl">
-                        <span :class="{ active: index == 0 }" @click="changeIndex(0)" id="1">筛选</span>
-                        <span :class="{ active: index == 1 }" @click="changeIndex(1)" id="2">搜索</span>
+                        <span :class="{ active: index == 0 }" @click="changeIndex(1)" id="2">筛选</span>
+                        <span :class="{ active: index == 1 }" @click="changeIndex(0)" id="1">搜索</span>
                         <span :class="{ active: index == 2 }" @click="changeIndex(2)" id="3">我的</span>
                         <span :class="{ active: index == 3 }" @click="changeIndex(3)" id="4">推荐</span>
                         <span :class="{ active: index == 4 }" @click="changeIndex(4)" id="5">专辑</span>
@@ -664,6 +664,22 @@ export default {
             this.$router.push({ path: "/details", query: { id: val.videoId } });
         },
         moveLeft() {
+            if (this.kd == 3) {
+                this.kd = 1
+                this.c.classList.remove("accs");
+                this.c = document.getElementById(this.kd);
+                this.c.classList.add("accs");
+                this.activeClick()
+                return
+            }
+            if (this.kd == 1) {
+                this.kd = 2
+                this.c.classList.remove("accs");
+                this.c = document.getElementById(this.kd);
+                this.c.classList.add("accs");
+                this.activeClick()
+                return
+            }
             if (this.kd >= 0 && this.kd < 11) {
                 this.c.classList.remove("accs");
                 this.kd--;
@@ -1325,6 +1341,7 @@ export default {
         changeIndex(val) {
             let d = Number(val)
             this.index = d
+            console.log(d)
             switch (d) {
                 // case 0: this.gosearch(); break;
                 case 0: this.$router.push({ path: '/classify' }); break;
@@ -2111,7 +2128,7 @@ export default {
 
 .activeNav {
     color: #FE9D3E;
-    background: #FBF0E5 !important;
+    background: #FBF0E5;
 }
 
 .allfenlei {

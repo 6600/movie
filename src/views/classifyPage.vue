@@ -118,7 +118,7 @@
                     <div style="color:#fff;width:100%;height:1px"></div>
                     <div class="allfenlei">
                         <button v-for="(item, index) in typeList.category" :key="item.categoryId"
-                            :id="11 + Number(index)" :class="{ activeNav: activeType == item.categoryId }"
+                            :id="11 + Number(index)" :class="{ activeNav: activeType == item.categoryId, activeNav: accs == item.categoryId }"
                             @click="selectCategory(item.categoryId)">
                             {{ item.name }}
                         </button>
@@ -166,7 +166,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="type">
+                            <div class="type" v-if="typeList.category">
                                 <div class="typel">
                                     <p>默认排序</p>
                                 </div>
@@ -210,110 +210,16 @@
                 </el-col>
             </el-row>
         </transition>
-        <!-- 我的 -->
-        <el-row :gutter="10">
-            <el-col :xs="22" :sm="22" :md="22" :lg="22" :xl="22" :offset="1">
-                <transition name="el-fade-in-linear">
-                    <div class="retui" v-if="index == 2">
-                        <div class="user">
-                            <div class="useri" v-if="userInfo.username">
-                                <div class="ut">
-                                    <el-image style="width: 140px; height: 140px;border-radius: 50%;" fit="cover"
-                                        :src="userInfo.headUrl"></el-image>
-                                </div>
-                                <div class="um">{{ userInfo.username }}</div>
-                                <div class="dlan" style="display:inline-block" @click="goquit" id="11">
-                                    退出登录
-                                </div>
-                            </div>
-                            <div class="useri" v-else>
-                                <div class="ut">
-                                    <el-image style="width: 140px; height: 140px;border-radius: 50%;" fit="cover"
-                                        :src="require('../assets/avatarr.png')"></el-image>
-                                </div>
-                                <div class="um">未登录</div>
-                                <div class="dlan" style="display:inline-block" @click="gologin" id="11">
-                                    登录
-                                </div>
-                            </div>
-                            <div class="userb">
-                            </div>
-                        </div>
-                        <div class="htpt">
-                            <p class="htptt">历史记录</p>
-                            <div class="nmovieList" style="min-height:274px">
-                                <div class="nmovie" v-for="(item, index) in history"
-                                    v-if="history.length > 0 && index < 5" :id="12 + Number(index)"
-                                    @click="goDetail(item)">
-                                    <el-image v-if="item.cover != ''" :src="item.videoCover" fit="cover">
-                                        <div slot="error" class="image-slot">
-                                            <i class="el-icon-picture-outline"></i>
-                                        </div>
-                                    </el-image>
-                                    <el-image v-else :src="require('../assets/his.png')" mode="none"></el-image>
-                                    <p class="introduce">
-                                        <span class="i1">{{ item.videoName }}</span>
-                                    </p>
-                                </div>
-                                <div class="nmovie mymovie" @click="gohis(0)" :id="12 + history.length">
-                                    <div>
-                                        <el-image :src="require('../assets/myhis.png')" mode="contain">
-                                            <div slot="error" class="image-slot">
-                                                <i class="el-icon-picture-outline"></i>
-                                            </div>
-                                        </el-image>
-                                        <p class="introducemy">
-                                            历史记录
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="htptt">我的收藏</p>
-                            <div class="nmovieList" style="min-height:274px">
-                                <div class="nmovie" v-for="(item, index) in collectList"
-                                    :id="13 + history.length + Number(index)" v-if="collectList.length > 0 && index < 5"
-                                    @click="goDetail(item)">
-                                    <el-image v-if="item.cover != ''" :src="item.cover" mode="contain">
-                                        <div slot="error" class="image-slot">
-                                            <i class="el-icon-picture-outline"></i>
-                                        </div>
-                                    </el-image>
-                                    <el-image v-else :src="require('../assets/his.png')" mode="none"></el-image>
-                                    <p class="introduce">
-                                        <span class="i1">{{ item.name }}</span>
-                                    </p>
-                                </div>
-                                <div class="nmovie mymovie mymovie2" @click="gohis(1)"
-                                    :id="13 + history.length + collectList.length">
-                                    <div>
-                                        <el-image :src="require('../assets/mysc.png')" mode="contain">
-                                            <div slot="error" class="image-slot">
-                                                <i class="el-icon-picture-outline"></i>
-                                            </div>
-                                        </el-image>
-                                        <p class="introducemy">
-                                            更多收藏
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </transition>
-            </el-col>
-        </el-row>
         <!-- <audio controls="controls" hidden :src="require('../assets/music/point.mp3')" ref="ado"></audio> -->
     </div>
 </template>
 
 <script>
 import navbar from "@/views/components/navbar";
-import shaixuan from '@/views/classify.vue'
 import Cookies from "js-cookie";
 export default {
     components: {
-        navbar,
-        shaixuan
+        navbar
     },
     data() {
         return {
@@ -380,27 +286,22 @@ export default {
                 "9",
             ],
             hotlist: [],
-            datalist: []
+            datalist: [],
+            loadKeyup: false
         };
     },
 
     activated() {
         this.getType();
         this.getHot();
-    },
-    mounted() {
-        this.getType();
-        this.getHot();
         let _this = this;
-        this.clientHeight = document.documentElement.clientHeight;
-        window.addEventListener("scroll", this.scrollBottom, true);
-        this.page = 1
-        let d = Cookies.get('randomId')
-        if (d == undefined) {
-            Cookies.set('randomId', this.GetsingleId())
+        if (this.index == 2) {
+            this.index = 0
+            this.activeActive(1)
+            console.log(this.loadKeyup)
         }
         document.onkeyup = function (event) {
-            if (_this.$route.name == 'classifyPage') {
+            if (_this.$route.name == 'classify') {
                 if (event.keyCode == 37) {
                     _this.moveLeft();
                     _this.up()
@@ -420,14 +321,33 @@ export default {
                 }
             }
         };
-        setTimeout(() => {
-            this.kd = 2
-            _this.c = document.getElementById(_this.kd);
-            console.log(_this.c)
-            this.c.classList.add("accs");
-        }, 200);
+    },
+    mounted() {
+        window.activeItem = this
+        let _this = this;
+        this.clientHeight = document.documentElement.clientHeight;
+        window.addEventListener("scroll", this.scrollBottom, true);
+        this.page = 1
+        let d = Cookies.get('randomId')
+        if (d == undefined) {
+            Cookies.set('randomId', this.GetsingleId())
+        }
+        this.loadKeyup = true
+        this.activeActive(2)
     },
     methods: {
+        activeActive(num) {
+            this.kd = num
+            if (document.querySelector('.accs')) {
+                document.querySelector('.accs').classList.remove("accs")
+            }
+            console.log(document.getElementById(num))
+            setTimeout(() => {
+                this.c = document.getElementById(num);
+                this.c.classList.add("accs");
+            }, 0);
+            return;
+        },
         getHot() {
             this.$http.get("/video/stat").then((res) => {
                 this.hotlist = res.data.data;
@@ -645,7 +565,19 @@ export default {
             this.$router.push({ path: "/details", query: { id: val.videoId } });
         },
         moveLeft() {
-
+            if (this.kd == 2) {
+                return
+            }
+            if (this.kd == 1) {
+                this.activeActive(2)
+                this.activeClick()
+                return
+            }
+            if (this.kd == 3) {
+                this.activeActive(1)
+                this.activeClick()
+                return
+            }
             if (this.kd >= 0 && this.kd < 11) {
                 this.c.classList.remove("accs");
                 this.kd--;
@@ -787,6 +719,16 @@ export default {
             }
         },
         moveRight() {
+            if (this.kd == 2) {
+                this.activeActive(1)
+                this.activeClick()
+                return
+            }
+            if (this.kd == 1) {
+                this.activeActive(3)
+                this.activeClick()
+                return
+            }
             if (this.kd >= 0 && this.kd < 11) {
                 this.c.classList.remove("accs");
                 this.kd++;
@@ -795,9 +737,7 @@ export default {
                 this.activeClick()
                 return
             }
-            // if (this.kd == 2) {
-            //   this.index = 2
-            // }
+            
             if (this.index == 1) {
                 console.log(11 + this.typeList.category.length + this.typeList.type.length)
                 let c = 12 + this.typeList.category.length + this.typeList.type.length + this.typeList.region.length + this.typeList.year.length + this.dataList.length
@@ -999,12 +939,8 @@ export default {
                 let c = 0
                 c = 12 + this.typeList.category.length + this.typeList.type.length + this.typeList.region.length + this.typeList.year.length + this.dataList.length
                 if (this.kd == 11) {
-                    this.c.classList.remove("accs");
-                    this.kd = 2;
-                    this.c = document.getElementById(this.kd);
-                    this.c.classList.add("accs");
-                    //4-8 9-29 30-32 33-77 78-79
-                    // typeList.category typeList.type typeList.region typeList.year
+                    this.activeActive(2)
+                    return
                 } else if (this.kd > 11 && this.kd < this.typeList.category.length + 11) {
                     this.c.classList.remove("accs");
                     this.kd--;
@@ -1198,6 +1134,10 @@ export default {
                 }
             }
             if (this.index == 0) {
+                if (this.kd == 0) {
+                    this.activeActive(11)
+                    return
+                }
                 if (this.keyword == "" && this.kd > 12 + this.list.length) {
                     this.c.classList.remove("accs");
                     this.kd = this.kd + 2;
@@ -2115,7 +2055,7 @@ export default {
 
 .activeNav {
     color: #FE9D3E;
-    background: #FBF0E5 !important;
+    background: #FBF0E5;
 }
 
 .allfenlei {

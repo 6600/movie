@@ -510,6 +510,6 @@ export default {
 
 .activeNav {
     color: #FE9D3E;
-    background: #FBF0E5 !important;
+    background: #FBF0E5;
 }
 </style>

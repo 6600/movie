@@ -971,7 +971,10 @@ export default {
           this.activeActive(112)
           return
         }
-        
+        if (this.kd == 111) {
+          this.activeActive(4)
+          return
+        }
         if (this.history.length != 0 && this.kd < 10 + this.history.length) {
           this.c.classList.remove("accs");
           this.kd--

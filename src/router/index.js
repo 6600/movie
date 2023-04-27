@@ -4,7 +4,7 @@ import HomeView from "../views/HomeView.vue";
 import Details from "../views/details.vue";
 import Lgoin from "../views/login.vue";
 import Search from "../views/search.vue";
-import Classify from "../views/classify.vue";
+import Classify from "../views/classifyPage.vue";
 import MoreSuggest from "../views/moreSuggest.vue";
 import LoginPhone from "../views/loginPhone.vue";
 import Register from "../views/register.vue";
